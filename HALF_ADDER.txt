@@ -1,0 +1,57 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity HALF_ADDER is
+    Port ( a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           s : out  STD_LOGIC;
+           c : out  STD_LOGIC);
+end HALF_ADDER;
+
+architecture Structural of HALF_ADDER is
+component XOR22 is 
+port(x,y : in std_logic; 
+z: out std_logic); 
+end component; 
+
+component AND22 is 
+port(p,q : in std_logic; 
+r: out std_logic); 
+end component; 
+begin 
+
+U1 : XOR22 port map(a,b,s); 
+U2 : AND22 port map(a,b,c); 
+end Structural;
+
+
+
+// XOR22
+library IEEE; 
+use IEEE.STD_LOGIC_1164.ALL; 
+entity XOR22 is 
+ Port ( x : in STD_LOGIC; 
+y : in STD_LOGIC; 
+z : out STD_LOGIC); 
+end XOR22; 
+architecture Behavioral of XOR22 is 
+begin 
+z <= x xor y; 
+end Behavioral;
+
+
+//AND22
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity AND22 is
+    Port ( p : in  STD_LOGIC;
+           q : in  STD_LOGIC;
+           r : out  STD_LOGIC);
+end AND22;
+architecture Behavioral of AND22 is
+begin
+r <= p and q;
+end Behavioral;
+
+

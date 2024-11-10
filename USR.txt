@@ -1,0 +1,34 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_arith.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+
+
+entity USR is
+    Port ( din : in  STD_LOGIC_VECTOR (3 downto 0);
+           clk,rst : in  STD_LOGIC;
+           s : in  STD_LOGIC_VECTOR (1 downto 0);
+           dout : inout  STD_LOGIC_VECTOR (3 downto 0));
+end USR;
+
+architecture Behavioral of USR is
+signal msbin,lsbin:STD_LOGIC;
+begin
+process(clk,rst)
+begin
+if(rst='1')then
+dout<="0000";
+elsif(clk' event and clk='1')then
+msbin<=din(3);
+lsbin<=din(0);
+case s is
+when "00"=>dout<=dout;
+when "01"=>dout<=msbin & dout(3 downto 1);
+when "10"=>dout<=dout(2 downto 0)& lsbin;
+when "11"=>dout<=din;
+when others=>dout<="0000";
+end case;
+end if;
+end process;
+
+end Behavioral;
